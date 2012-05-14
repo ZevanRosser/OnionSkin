@@ -1,0 +1,1 @@
+Canvas based animation tool inspired by Flash's onion skinning
