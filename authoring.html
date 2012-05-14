@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>OnionSkin Prototype</title>
+    <link rel="stylesheet" href="http://mtcanvas.com/css/reset.css">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <script src="js/onion-skin-authoring.js"></script>
+    <script src="js/renderer.js"></script>
+    <script src="js/canvas.js"></script>
+    <script src="js/timeline.js"></script>
+    
+    <script>
+      $(function(){
+        
+        os.OnionSkinAuthoring();
+        
+      });
+    </script>
+  </head>
+  <body>
+ 
+    <div id="ui">
+      <h1>OnionSkin</h1>
+      frame : <span id="frame-num">1</span>
+      <div id="timeline">
+        <div class="frame" data-num="0"></div>
+      </div>
+      
+      <button id="play">&#9658;</button>
+      <div id="stop-container"><button id="stop">stop</button></div>
+      <button id="add">add frame</button>
+      <input type="checkbox" id="toggleOnion" checked/> onion skinning
+      -
+      <input id="file-name" type="text" placeholder="file name" />
+      <button id="save">save</button>
+      -
+      open : <select id="files"></select>
+      
+    </div>
+    <div id="container"></div>
+    
+  </body>
+</html>

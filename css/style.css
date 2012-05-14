@@ -1,0 +1,57 @@
+body,html{
+  font-family : Helvetica, sans-serif; 
+  font-size : 13px;
+  text-shadow : 1px 1px 2px white;
+  color : #53667a;
+  overflow : hidden;
+}
+button, input, option{
+  color : #53667a;
+}
+div{
+  position : relative; 
+}
+h1{
+  font-size : 20px;
+  margin-bottom : 10px; 
+}
+#ui{
+  padding : 5px; 
+  background-color : #efefef;
+}
+#timeline{
+  height : 20px;
+  margin-top : 3px;
+  margin-bottom : 5px;
+  border : 1px solid #666;
+  overflow-x : auto;
+  overflow-y : hidden;
+}
+.frame{
+  float : left;
+  width : 10px;
+  height : 20px;
+  border-right : 1px solid #666;
+  background-color : #ccc; 
+}
+#files{
+  width : 100px; 
+}
+canvas{
+  background-color : white; 
+  border-top : 1px solid #CCC;
+}
+#stop{
+  position : absolute;
+  top : 0px;
+  left : 0px;
+  z-index : 1000; 
+}
+#play{
+  float : left; 
+}
+#stop-container{
+  float : left;
+  height : 25px;
+  width : 45px;
+}
