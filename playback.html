@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title></title>
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <script src="js/onion-skin-playback.js"></script>
+    <script src="js/renderer.js"></script>
+    <script src="js/canvas.js"></script>
+    <script>
+     $(function(){
+
+       new os.OnionSkinPlayback("files/earwig.json");
+       
+     });
+    </script>
+    <style>
+      body, html{
+       overflow : hidden; 
+      }
+    </style>
+  </head>
+  <body>
+    <div id="container"></div>
+  </body>
+</html>
