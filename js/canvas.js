@@ -23,8 +23,11 @@ os.Canvas = function(renderer) {
     return frames.concat();
   };
   
+  this.reset = function(){
+    this.setData([[]]); 
+  };
   this.setData = function(data) {
-    frame = 0;
+    frame = -1;
     frames = data.concat();
   }
 

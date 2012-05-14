@@ -11,9 +11,16 @@ os.OnionSkinAuthoring = function() {
       isFile = /[a-zA-Z0-9_\.]+/,
       files = $("#files"),
       fileName = $("#file-name"),
+      newFile = $("#new-file"),
       renderer = new os.Renderer(),
       canvas = new os.Canvas(renderer),
       timeline = new os.Timeline(canvas);
+  
+  newFile.click(function(){
+    fileName.val("");
+    files.val("--files");
+    timeline.reset();
+  });
 
   $("#save").click(function() {
     var name = $.trim(fileName.val());

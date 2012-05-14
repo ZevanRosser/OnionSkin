@@ -2,7 +2,7 @@
   
   $files = glob("../files/*");
   
-  echo "<option>--files</option>";
+  echo "<option value='--files'>--files</option>";
   
   foreach($files as $file){
     $file = preg_replace("/\.\.\/files\/|\.json/", "", $file);

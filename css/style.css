@@ -16,19 +16,19 @@ h1{
   margin-bottom : 10px; 
 }
 #ui{
-  padding : 5px; 
+  padding : 10px; 
   background-color : #efefef;
 }
 #timeline{
-  height : 20px;
+  height : 35px;
   margin-top : 3px;
   margin-bottom : 5px;
   border : 1px solid #666;
-  overflow-x : auto;
+  overflow-x : scroll;
   overflow-y : hidden;
 }
 .frame{
-  float : left;
+  position : absolute;
   width : 10px;
   height : 20px;
   border-right : 1px solid #666;

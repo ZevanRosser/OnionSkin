@@ -29,6 +29,7 @@ os.Timeline = function(canvas) {
       for (var i = 0; i < data.length; i++) {
         addFrame();
       }
+      timeline.scrollLeft(0);
       canvas.setData(data);
       canvas.gotoAndStop(0);
       timeline.find("div").first().trigger("mousedown");
@@ -40,10 +41,13 @@ os.Timeline = function(canvas) {
   function addFrame() {
     canvas.addFrame();
     $("<div class='frame'>")
+      .css({left : frame * 11})
       .attr("data-num", frame++)
       .appendTo(timeline)
       .trigger("mousedown");
     frameNum.text(frame);
+    var maxScroll = timeline[0].scrollWidth
+    timeline.scrollLeft(maxScroll);
   }
 
   canvas.frameChangeCallback(function(theFrame) {
@@ -70,6 +74,13 @@ os.Timeline = function(canvas) {
   add.click(function() {
     addFrame();
   });
+  
+  this.reset = function(){
+    canvas.reset();
+    frame = 0;
+    timeline.html("");
+    addFrame();
+  };
   
   function updateFrameNum(num){
     frameNum.text(parseInt(num) + 1);
