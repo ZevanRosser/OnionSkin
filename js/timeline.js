@@ -5,9 +5,12 @@ os.Timeline = function(canvas) {
       timeline = $("#timeline"),
       play = $("#play"),
       frame = 1,
-      currFrameBtn, 
+      currFrameBtn = $(".frame"), 
       SPACE = 32,
       RIGHT = 39,
+      LEFT = 37,
+      LESS_THAN = 188, 
+      GREATER_THAN = 190,
       
       cover = $("<div>", {
         css: {
@@ -86,12 +89,21 @@ os.Timeline = function(canvas) {
     frameNum.text(parseInt(num) + 1);
   }
 
-  os.doc.keyup(function(e) {
+  os.doc.keyup(function(e) { 
+    if (canvas.playing) return;
+      
     if (e.which == SPACE) {
       addFrame();
+    } else if (e.which == LEFT){
+      canvas.stop();
+      cover.hide();
     } else if (e.which == RIGHT) {
       canvas.play();
       cover.show();
+    }else if (e.which == LESS_THAN){
+      canvas.prev();
+    }else if (e.which == GREATER_THAN){
+      canvas.next();
     }
   });
 
