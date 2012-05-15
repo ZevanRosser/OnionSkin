@@ -8,7 +8,7 @@ os.OnionSkinAuthoring = function() {
 
   var fileListPath = "php/file-list.php", 
       savePath = "php/save.php",
-      isFile = /[a-zA-Z0-9_\.]+/,
+      isFile = /[a-zA-Z0-9_\-]+/,
       files = $("#files"),
       fileName = $("#file-name"),
       newFile = $("#new-file"),
@@ -24,7 +24,7 @@ os.OnionSkinAuthoring = function() {
 
   $("#save").click(function() {
     var name = $.trim(fileName.val());
-    if (name.length == 0 || !name.match(isFile)){
+    if (name.length == 0 || !isFile.test(name)){
       alert("Please enter a valid file name.");
       return; 
     }

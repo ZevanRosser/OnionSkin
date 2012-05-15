@@ -26,6 +26,8 @@ os.Timeline = function(canvas) {
        }
      }).appendTo(os.body).hide();
 
+  currFrameBtn.css("background-color", "gray");
+  
   this.setData = function(data) {
     try {
       data = JSON.parse(data);
@@ -146,4 +148,5 @@ os.Timeline = function(canvas) {
       backgroundColor: "gray"
     });
   });
+  
 };

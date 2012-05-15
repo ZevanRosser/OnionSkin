@@ -1,0 +1,8 @@
+tweak look of interface
+
+consider changing keyboard shortcuts around
+
+figure out final saving functionality if any
+
+bug - sometimes canvas doesn't show up until refresh
+- INVALID STATE LAYER ?

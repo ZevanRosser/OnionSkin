@@ -8,10 +8,20 @@ body,html{
 button, input, option{
   color : #53667a;
 }
+button{
+  background-color : white;
+  border : 1px solid #aaa;
+  border-radius : 5px;
+  cursor : pointer;
+}
+button:hover{
+  color : black;  
+}
+
 div{
   position : relative; 
 }
-h1{
+.title{
   font-size : 20px;
   margin-bottom : 10px; 
 }
@@ -19,6 +29,7 @@ h1{
   min-width : 600px;
   padding : 10px; 
   background-color : #efefef;
+  border-bottom : 1px solid #CCC;
 }
 #timeline{
   height : 35px;
@@ -38,8 +49,12 @@ h1{
 #files{
   width : 100px; 
 }
+#new-file{
+  position : relative;
+  top : -3px;
+}
 canvas{
-  border-top : 1px solid #CCC;
+  
 }
 #stop{
   position : absolute;
