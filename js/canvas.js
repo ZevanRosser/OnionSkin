@@ -4,6 +4,7 @@ os.Canvas = function(renderer) {
   var frame = 0,
       frames = [[]],
       line = 0,
+      fileName = $("#file-name"), // consider moving this
       container = $("#container"),
       canvas = $("<canvas>").appendTo(container)[0],
       c = canvas.getContext("2d"),
@@ -75,7 +76,11 @@ os.Canvas = function(renderer) {
   };
 
   this.duplicateFrame = function(){
-    this.addFrame(frames[frame].concat());
+    var nextFrame = frame + 1;
+    var newFrameData = frames[frame].concat();
+    frames.splice(frame,0,newFrameData);
+    this.gotoAndStop(nextFrame);
+    this.frameChange(nextFrame);
   };
   
   this.addFrame = function(value) {
@@ -122,7 +127,9 @@ os.Canvas = function(renderer) {
     return false;
   }
   
+ 
   $(canvas).mousedown(function(e) {
+    fileName.blur();
     px = e.pageX;
     py = e.pageY - offY;
     frames[frame][line++] = [px, py];

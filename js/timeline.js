@@ -49,14 +49,16 @@ os.Timeline = function(canvas) {
   }
   function duplicateFrame(){
     canvas.duplicateFrame();
-    newFrameCell();
+    newFrameCell(true);
   }
-  function newFrameCell(){
-    $("<div class='frame'>")
+  function newFrameCell(dontGo){
+    var cell = $("<div class='frame'>")
       .css({left : frame * 11})
       .attr("data-num", frame++)
-      .appendTo(timeline)
-      .trigger("mousedown");
+      .appendTo(timeline);
+    if (!dontGo){
+      cell.trigger("mousedown");
+    }
     frameNum.text(frame);
     var maxScroll = timeline[0].scrollWidth
     timeline.scrollLeft(maxScroll);
@@ -103,6 +105,9 @@ os.Timeline = function(canvas) {
   }
 
   os.doc.keyup(function(e) { 
+    if ($(e.target).attr("id") == "file-name"){
+      return;  
+    }
     
     if (e.which == LEFT){
       canvas.stop();
