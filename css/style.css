@@ -16,6 +16,7 @@ h1{
   margin-bottom : 10px; 
 }
 #ui{
+  min-width : 600px;
   padding : 10px; 
   background-color : #efefef;
 }
@@ -38,7 +39,6 @@ h1{
   width : 100px; 
 }
 canvas{
-  background-color : white; 
   border-top : 1px solid #CCC;
 }
 #stop{
