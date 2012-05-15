@@ -48,8 +48,9 @@ os.Timeline = function(canvas) {
     newFrameCell();
   }
   function duplicateFrame(){
-    canvas.duplicateFrame();
+    var theFrame = canvas.duplicateFrame();
     newFrameCell(true);
+    canvas.frameChange(theFrame);
   }
   function newFrameCell(dontGo){
     var cell = $("<div class='frame'>")

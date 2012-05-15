@@ -80,7 +80,8 @@ os.Canvas = function(renderer) {
     var newFrameData = frames[frame].concat();
     frames.splice(frame,0,newFrameData);
     this.gotoAndStop(nextFrame);
-    this.frameChange(nextFrame);
+    //console.log(nextFrame, frames.length);
+    return nextFrame;
   };
   
   this.addFrame = function(value) {
