@@ -31,7 +31,7 @@ os.Canvas = function(renderer) {
   
   os.win.resize(function(){
     clearInterval(resizeId);
-    resizeId = setTimeout(drawTemp, 100);
+    resizeId = setTimeout(drawTemp, 500);
   });
 
   this.frameChange = function(){};
@@ -74,9 +74,14 @@ os.Canvas = function(renderer) {
     this.gotoAndStop(0);
   };
 
-  this.addFrame = function() {
+  this.duplicateFrame = function(){
+    this.addFrame(frames[frame].concat());
+  };
+  
+  this.addFrame = function(value) {
+    if (!value) value = [];
     frame++;
-    frames[frame] = [];
+    frames[frame] = value;
     line = 0;
     this.gotoAndStop(frame);
   };

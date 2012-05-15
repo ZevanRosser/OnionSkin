@@ -1,5 +1,6 @@
 os.Timeline = function(canvas) {
   var add = $("#add"),
+      duplicate = $("#duplicate"),
       frameNum = $("#frame-num"),
       stop = $("#stop"),
       timeline = $("#timeline"),
@@ -11,6 +12,7 @@ os.Timeline = function(canvas) {
       LEFT = 37,
       LESS_THAN = 188, 
       GREATER_THAN = 190,
+      OPTION = 18,
       
       cover = $("<div>", {
         css: {
@@ -43,6 +45,13 @@ os.Timeline = function(canvas) {
 
   function addFrame() {
     canvas.addFrame();
+    newFrameCell();
+  }
+  function duplicateFrame(){
+    canvas.duplicateFrame();
+    newFrameCell();
+  }
+  function newFrameCell(){
     $("<div class='frame'>")
       .css({left : frame * 11})
       .attr("data-num", frame++)
@@ -78,6 +87,10 @@ os.Timeline = function(canvas) {
     addFrame();
   });
   
+  duplicate.click(function(){
+    duplicateFrame();
+  });
+  
   this.reset = function(){
     canvas.reset();
     frame = 0;
@@ -104,7 +117,10 @@ os.Timeline = function(canvas) {
       canvas.prev();
     }else if (e.which == GREATER_THAN){
       canvas.next();
+    }else if (e.which == OPTION){
+      duplicateFrame(); 
     }
+    //console.log(e.which);
   });
 
   os.doc.on("click", ".frame", function() {
