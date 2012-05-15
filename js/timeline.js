@@ -103,13 +103,16 @@ os.Timeline = function(canvas) {
   }
 
   os.doc.keyup(function(e) { 
+    
+    if (e.which == LEFT){
+      canvas.stop();
+      cover.hide();
+    }
+    
     if (canvas.playing) return;
       
     if (e.which == SPACE) {
       addFrame();
-    } else if (e.which == LEFT){
-      canvas.stop();
-      cover.hide();
     } else if (e.which == RIGHT) {
       canvas.play();
       cover.show();
