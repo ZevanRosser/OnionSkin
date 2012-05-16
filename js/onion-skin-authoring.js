@@ -42,7 +42,9 @@ os.OnionSkinAuthoring = function() {
       n: name,
       data: data
     }, function() {
-      alert("Your file has been saved.");
+      if (!downloadMode){
+        alert("Your file has been saved.");
+      }
       $.post(fileListPath, updateFiles);
 
     });

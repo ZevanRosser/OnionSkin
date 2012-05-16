@@ -1,12 +1,11 @@
 <?php
   if (isset($_GET["f"])){
-    header('Content-disposition: attachment; filename=' . $_GET["f"]);
-    header('Content-type: text/html');
+    header("Content-disposition: attachment; filename=" . $_GET["f"]);
+    header("Content-type: text/html");
   }else{
     die("no file name");
   }
-  
-  ?>
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -33,7 +32,3 @@
     <div id="container"></div>
   </body>
 </html>
-<!--
-<script src="js/onion-skin-playback.js"></script>
-<script src="js/renderer.js"></script>
-<script src="js/canvas.js"></script>-->
