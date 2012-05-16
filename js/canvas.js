@@ -84,6 +84,18 @@ os.Canvas = function(renderer) {
     return nextFrame;
   };
   
+  this.deleteFrame = function(){
+    frames.splice(frame, 1);
+    var lengMinusOne = frames.length - 1;
+    if (frame > lengMinusOne) frame = lengMinusOne;
+    if (frames.length == 0){
+      frames = [[]];
+      frame = 0;
+    };
+    this.gotoAndStop(frame);
+    this.frameChange(frame);
+  };
+  
   this.addFrame = function(value) {
     if (!value) value = [];
     frame++;

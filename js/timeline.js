@@ -13,6 +13,7 @@ os.Timeline = function(canvas) {
       LESS_THAN = 188, 
       GREATER_THAN = 190,
       OPTION = 18,
+      DELETE = 8,
       
       cover = $("<div>", {
         css: {
@@ -130,8 +131,13 @@ os.Timeline = function(canvas) {
       canvas.next();
     }else if (e.which == OPTION){
       duplicateFrame(); 
+    }else if (e.which == DELETE){ // wrap this in a function
+      canvas.deleteFrame();
+      $(".frame").last().remove();
+      frame--;
+      if (frame < 0) frame = 0;
     }
-    //console.log(e.which);
+    console.log(e.which);
   });
 
   os.doc.on("click", ".frame", function() {
