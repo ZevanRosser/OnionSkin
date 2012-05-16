@@ -17,7 +17,6 @@ os.Timeline = function(canvas) {
       OPTION = 18,
       DELETE = 8,
       
-      
       cover = $("<div>", {
       css: {
         position: "absolute",
@@ -78,7 +77,7 @@ os.Timeline = function(canvas) {
       cell.trigger("mousedown");
     }
     frameNum.text(frame);
-    var maxScroll = timeline[0].scrollWidth
+    var maxScroll = timeline[0].scrollWidth;
     timeline.scrollLeft(maxScroll);
   }
 
@@ -151,7 +150,7 @@ os.Timeline = function(canvas) {
     } else if (e.which == DELETE) {
       deleteFrame();
     }
-    console.log(e.which);
+    //console.log(e.which);
   });
 
   os.doc.on("click", ".frame", function() {

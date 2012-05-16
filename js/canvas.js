@@ -4,7 +4,6 @@ os.Canvas = function(renderer) {
   var frame = 0,
       frames = [[]],
       line = 0,
-      fileName = $("#file-name"), // consider moving this
       container = $("#container"),
       canvas = $("<canvas>").appendTo(container)[0],
       c = canvas.getContext("2d"),
@@ -18,7 +17,6 @@ os.Canvas = function(renderer) {
   function resize(){
     canvas.width = os.win.width();
     canvas.height = os.win.height() - offY;
-   
   }
   resize();
   
@@ -35,10 +33,11 @@ os.Canvas = function(renderer) {
     resizeId = setTimeout(drawTemp, 500);
   });
 
+  // consider revising
   this.frameChange = function(){};
   this.frameChangeCallback = function(func){
     this.frameChange = func;
-  }
+  };
   
   this.getData = function() {
     return frames.concat();
@@ -47,10 +46,11 @@ os.Canvas = function(renderer) {
   this.reset = function(){
     this.setData([[]]); 
   };
+  
   this.setData = function(data) {
     frame = -1;
     frames = data.concat();
-  }
+  };
 
   this.play = function() {
     this.stop();
@@ -69,7 +69,6 @@ os.Canvas = function(renderer) {
   this.stop = function() {
     this.playing = false;
     clearInterval(playId);
-    playCount = 0;
     this.onionSkin = true;
     this.frameChange(0);
     this.gotoAndStop(0);
@@ -93,7 +92,7 @@ os.Canvas = function(renderer) {
     if (frames.length == 0){
       frames = [[]];
       frame = 0;
-    };
+    }
     this.gotoAndStop(frame);
     this.frameChange(frame);
     return true;
@@ -114,6 +113,7 @@ os.Canvas = function(renderer) {
     this.gotoAndStop(frame); 
     this.frameChange(frame);
   };
+  
   this.prev = function(){
     frame--;
     if (frame < 0) frame = 0;
@@ -144,7 +144,7 @@ os.Canvas = function(renderer) {
   }
   
   $(canvas).mousedown(function(e) {
-    fileName.blur();
+    $(":focus").blur(); // *
     px = e.pageX;
     py = e.pageY - offY;
     frames[frame][line++] = [px, py];

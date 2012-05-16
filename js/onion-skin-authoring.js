@@ -6,27 +6,36 @@ os.OnionSkinAuthoring = function() {
   os.body = $("body");
   os.ui = $("#ui");
 
-  var fileListPath = "php/file-list.php", 
+  var fileListPath = "php/file-list.php",
       savePath = "php/save.php",
       isFile = /[a-zA-Z0-9_\-]+/,
       files = $("#files"),
       fileName = $("#file-name"),
       newFile = $("#new-file"),
+      save = $("#save"),
+      download = $("#download"),
+      downloadMode = false,
       renderer = new os.Renderer(),
       canvas = new os.Canvas(renderer),
       timeline = new os.Timeline(canvas);
-  
-  newFile.click(function(){
+
+  newFile.click(function() {
     fileName.val("");
     files.val("--files");
     timeline.reset();
   });
 
-  $("#save").click(function() {
+  download.click(function() {
+    downloadMode = true;
+    save.trigger("click");
+  });
+
+  save.click(function() {
     var name = $.trim(fileName.val());
-    if (name.length == 0 || !isFile.test(name)){
+    fileName.val(name);
+    if (name.length == 0 || !isFile.test(name)) {
       alert("Please enter a valid file name.");
-      return; 
+      return;
     }
     var data = JSON.stringify(canvas.getData());
     $.post(savePath, {
@@ -35,14 +44,20 @@ os.OnionSkinAuthoring = function() {
     }, function() {
       alert("Your file has been saved.");
       $.post(fileListPath, updateFiles);
-      
+
     });
   });
-  
+
   $.post(fileListPath, updateFiles);
-  function updateFiles(data){
+
+  function updateFiles(data) {
+    var name = fileName.val()
     files.html(data);
-    files.val(fileName.val());
+    files.val(name);
+    if (downloadMode) {
+      window.location.href = "download.php?f=" + name;
+      downloadMode = false;
+    }
   }
 
   files.change(function() {

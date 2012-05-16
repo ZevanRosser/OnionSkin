@@ -1,3 +1,7 @@
+general code cleanup
+
+remove frame... done
+
 tweak look of interface
 
 consider changing keyboard shortcuts around
