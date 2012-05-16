@@ -5,30 +5,33 @@ os.Timeline = function(canvas) {
       stop = $("#stop"),
       timeline = $("#timeline"),
       play = $("#play"),
+      del = $("#delete"),
       frame = 1,
-      currFrameBtn = $(".frame"), 
+      currFrameBtn = $(".frame"),
+      self = this,
       SPACE = 32,
       RIGHT = 39,
       LEFT = 37,
-      LESS_THAN = 188, 
+      LESS_THAN = 188,
       GREATER_THAN = 190,
       OPTION = 18,
       DELETE = 8,
       
+      
       cover = $("<div>", {
-        css: {
-          position: "absolute",
-          top: 0,
-          left: 0,
-          width: os.win.width(),
-          height: os.win.height(),
-          backgroundColor: "red",
-          opacity: 0
-       }
-     }).appendTo(os.body).hide();
+      css: {
+        position: "absolute",
+        top: 0,
+        left: 0,
+        width: os.win.width(),
+        height: os.win.height(),
+        backgroundColor: "red",
+        opacity: 0
+      }
+    }).appendTo(os.body).hide();
 
   currFrameBtn.css("background-color", "gray");
-  
+
   this.setData = function(data) {
     try {
       data = JSON.parse(data);
@@ -41,8 +44,8 @@ os.Timeline = function(canvas) {
       canvas.setData(data);
       canvas.gotoAndStop(0);
       timeline.find("div").first().trigger("mousedown");
-    }catch(e){
-      alert("Error reading file..."); 
+    } catch (e) {
+      alert("Error reading file...");
     }
   };
 
@@ -50,17 +53,28 @@ os.Timeline = function(canvas) {
     canvas.addFrame();
     newFrameCell();
   }
-  function duplicateFrame(){
+
+  function duplicateFrame() {
     var theFrame = canvas.duplicateFrame();
     newFrameCell(true);
     canvas.frameChange(theFrame);
   }
-  function newFrameCell(dontGo){
-    var cell = $("<div class='frame'>")
-      .css({left : frame * 11})
-      .attr("data-num", frame++)
-      .appendTo(timeline);
-    if (!dontGo){
+
+  function deleteFrame() {
+    if (canvas.deleteFrame()) {
+      $(".frame").last().remove();
+      frame--;
+      if (frame < 0) frame = 0;
+    }else{
+      self.reset();
+    }
+  }
+
+  function newFrameCell(dontGo) {
+    var cell = $("<div class='frame'>").css({
+      left: frame * 11
+    }).attr("data-num", frame++).appendTo(timeline);
+    if (!dontGo) {
       cell.trigger("mousedown");
     }
     frameNum.text(frame);
@@ -92,50 +106,50 @@ os.Timeline = function(canvas) {
   add.click(function() {
     addFrame();
   });
-  
-  duplicate.click(function(){
+
+  duplicate.click(function() {
     duplicateFrame();
   });
-  
-  this.reset = function(){
+
+  del.click(function(){
+    deleteFrame();
+  });
+  this.reset = function() {
     canvas.reset();
     frame = 0;
     timeline.html("");
     addFrame();
   };
-  
-  function updateFrameNum(num){
+
+  function updateFrameNum(num) {
     frameNum.text(parseInt(num) + 1);
   }
 
-  os.doc.keyup(function(e) { 
-    if ($(e.target).attr("id") == "file-name"){
-      return;  
+  os.doc.keyup(function(e) {
+    if ($(e.target).attr("id") == "file-name") {
+      return;
     }
-    
-    if (e.which == LEFT){
+
+    if (e.which == LEFT) {
       canvas.stop();
       cover.hide();
     }
-    
+
     if (canvas.playing) return;
-      
+
     if (e.which == SPACE) {
       addFrame();
     } else if (e.which == RIGHT) {
       canvas.play();
       cover.show();
-    }else if (e.which == LESS_THAN){
+    } else if (e.which == LESS_THAN) {
       canvas.prev();
-    }else if (e.which == GREATER_THAN){
+    } else if (e.which == GREATER_THAN) {
       canvas.next();
-    }else if (e.which == OPTION){
-      duplicateFrame(); 
-    }else if (e.which == DELETE){ // wrap this in a function
-      canvas.deleteFrame();
-      $(".frame").last().remove();
-      frame--;
-      if (frame < 0) frame = 0;
+    } else if (e.which == OPTION) {
+      duplicateFrame();
+    } else if (e.which == DELETE) {
+      deleteFrame();
     }
     console.log(e.which);
   });
@@ -154,5 +168,5 @@ os.Timeline = function(canvas) {
       backgroundColor: "gray"
     });
   });
-  
+
 };

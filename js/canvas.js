@@ -80,11 +80,13 @@ os.Canvas = function(renderer) {
     var newFrameData = frames[frame].concat();
     frames.splice(frame,0,newFrameData);
     this.gotoAndStop(nextFrame);
-    //console.log(nextFrame, frames.length);
     return nextFrame;
   };
   
   this.deleteFrame = function(){
+    if (frame == 0 && frames.length == 1){
+      return false;
+    }
     frames.splice(frame, 1);
     var lengMinusOne = frames.length - 1;
     if (frame > lengMinusOne) frame = lengMinusOne;
@@ -94,6 +96,7 @@ os.Canvas = function(renderer) {
     };
     this.gotoAndStop(frame);
     this.frameChange(frame);
+    return true;
   };
   
   this.addFrame = function(value) {
@@ -140,7 +143,6 @@ os.Canvas = function(renderer) {
     return false;
   }
   
- 
   $(canvas).mousedown(function(e) {
     fileName.blur();
     px = e.pageX;
